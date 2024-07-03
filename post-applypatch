@@ -1,0 +1,5 @@
+#!/bin/bash
+# post-applypatch hook to decrypt files with SOPS
+
+~/.githooks/decrypt_files.sh
+
