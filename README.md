@@ -7,7 +7,7 @@ https://thebitcoffee.wordpress.com/2024/07/03/securing-git-workflows-age-sops-an
 To explicitly decrypt - after git rebase:
 
 ```
-git config --global alias.encrypt '!fe() { ~/.githooks/encrypt_files.sh --all; }; fe'
-git config --global alias.decrypt '!fd() { ~/.githooks/decrypt_files.sh; }; fd'
+git config --global alias.encrypt '!encrypt() { ~/.githooks/encrypt_files.sh; }; encrypt'
+git config --global alias.decrypt '!decrypt() { ~/.githooks/decrypt_files.sh; }; decrypt'
 ```
 

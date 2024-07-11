@@ -1,5 +1,5 @@
 #!/bin/bash
 # pre-commit hook to encrypt files with SOPS
 
-~/.githooks/encrypt_files.sh
+~/.githooks/encrypt_files.sh --staged-files-only
 
