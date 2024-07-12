@@ -1,0 +1,7 @@
+creation_rules:
+  - encrypted_regex: '^(user.*|pass.*)$'
+    filename_regex: '\.(yaml|yml|json)$'
+    key_groups:
+      - age:
+        - <YOUR_AGE_PUBLIC_KEY>
+
