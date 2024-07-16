@@ -55,7 +55,9 @@ for FILE in ${FILES_TO_ENCRYPT}; do  # Loop through each file in the list
     fi
 
     if [[ "${FILE}" =~ \.(yaml|yml|json)$ ]]; then  # Check if the file has a YAML, YML, or JSON extension
-        if sops --config ~/.sops.yaml -e "${FILE}" | grep -m 1 -P -q '(?<!mac: )ENC\['; then  # Check if the temporary output contains encrypted data
+        ENCRYPTS_SOMETHING=$(sops --config ~/.sops.yaml -e "${FILE}" | grep -m 1 -P -q '(?<!mac: )ENC\['; echo $?)
+        SOPS_EXIT_CODE=${PIPESTATUS[0]}
+        if [ "${ENCRYPTS_SOMETHING}" -eq 0 ]; then  # Check if the temporary output contains encrypted data
             ACTION=1  # Set ACTION to 1 to indicate that a file was encrypted
             echo "Encrypting file: ${FILE}"  # Print a message indicating the file is being encrypted and re-added
             sops --config ~/.sops.yaml -e -i "${FILE}"  # Encrypt the file in place
@@ -63,7 +65,7 @@ for FILE in ${FILES_TO_ENCRYPT}; do  # Loop through each file in the list
                 git add "${FILE}"  # Add the encrypted file back to the staging area
             fi
         fi
-        if [ ${PIPESTATUS[0]} -ne 0 ]; then
+        if [ "${SOPS_EXIT_CODE}" -ne 0 ]; then
             echo "Error in file: ${FILE}"
         fi
     fi
