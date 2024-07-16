@@ -21,7 +21,7 @@ fi
 
 ACTION=0  # Initialize an ACTION variable to track if any files were decrypted
 REPO_ROOT=$(git rev-parse --show-toplevel)
-FILES_TO_DECRYPT=$(find "${REPO_ROOT}" -iregex '^.*\.\(yaml\|yml\|json\)$')  # Define the files or directories you want to decrypt
+FILES_TO_DECRYPT=$(find "${REPO_ROOT}" -type f -iregex '^.*\.\(yaml\|yml\|json\)$' -exec realpath '{}' \;)  # Define the files or directories you want to decrypt
 IFS=$'\n'  # Set the internal field separator to newline to handle filenames with spaces
 
 for FILE in ${FILES_TO_DECRYPT}; do
