@@ -4,4 +4,9 @@ creation_rules:
     key_groups:
       - age:
         - <YOUR_AGE_PUBLIC_KEY>
+stores:
+  yaml:
+    indent: 2
+  json:
+    indent: 2
 
