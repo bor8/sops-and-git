@@ -27,7 +27,7 @@ get_ignored_files() {
 
 # Determine whether to encrypt staged files or all files
 if [ "${1:-}" == "--staged-files-only" ]; then
-    FILES_TO_ENCRYPT=$(git diff --cached --name-only --diff-filter=ACM | xargs realpath)
+    FILES_TO_ENCRYPT=$(git diff --cached --name-only --diff-filter=ACM | xargs --no-run-if-empty realpath)
 else
     REPO_ROOT=$(git rev-parse --show-toplevel)
     ALL_FILES=$(find "${REPO_ROOT}" -type f -iregex '^.*\.\(yaml\|yml\|json\)$' -exec realpath '{}' \;)
